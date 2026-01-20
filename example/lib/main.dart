@@ -88,23 +88,30 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (_items.length < 7) {
-            setState(() {
-              _items.add(GlassNavItem(
-                icon: Icons.star_border,
-                label: 'Item ${_items.length + 1}',
-              ));
-            });
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Max items reached (7) for demo')),
-            );
-          }
-        },
-        child: const Icon(Icons.add),
-        tooltip: 'Add Item',
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 90.0), // Margin above navbar
+        child: FloatingActionButton(
+          onPressed: () {
+            if (_items.length < 8) {
+              setState(() {
+                _items.add(
+                    _availableIcons[_items.length % _availableIcons.length]);
+              });
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Max items reached (8) for demo')),
+              );
+            }
+          },
+          backgroundColor: Colors.white.withOpacity(0.2),
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+              side: BorderSide(color: Colors.white.withOpacity(0.3))),
+          child: const Icon(Icons.add, color: Colors.white),
+          tooltip: 'Add Item',
+        ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -112,24 +119,56 @@ class _HomePageState extends State<HomePage> {
           items: _items,
           currentIndex: _currentIndex.clamp(0, _items.length - 1),
           onTap: _onTap,
-          backgroundColor: Colors.white.withOpacity(0.1),
-          bubbleColor: Colors.white.withOpacity(0.3),
+          backgroundColor: Colors.white.withOpacity(0.05),
+          bubbleGradient: LinearGradient(
+            colors: [
+              Colors.white.withOpacity(0.4),
+              Colors.white.withOpacity(0.1)
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
           activeIconColor: Colors.white,
-          iconColor: Colors.white60,
-          blurStrength: 15,
+          iconColor: Colors.white38,
+          blurStrength: 20,
           borderRadius: 25,
-          height: 75,
+          height: 80,
         ),
       ),
     );
   }
+
+  // Pre-defined list of distinct icons for demo
+  final List<GlassNavItem> _availableIcons = const [
+    GlassNavItem(icon: Icons.home_rounded, label: 'Home'),
+    GlassNavItem(icon: Icons.search_rounded, label: 'Search'),
+    GlassNavItem(icon: Icons.favorite_rounded, label: 'Likes'),
+    GlassNavItem(icon: Icons.person_rounded, label: 'Profile'),
+    GlassNavItem(icon: Icons.settings_rounded, label: 'Settings'),
+    GlassNavItem(icon: Icons.shopping_cart_rounded, label: 'Cart'),
+    GlassNavItem(icon: Icons.notifications_rounded, label: 'Notify'),
+    GlassNavItem(icon: Icons.chat_bubble_rounded, label: 'Chat'),
+  ];
 
   Widget _buildPage(String title, IconData icon) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 80, color: Colors.white.withOpacity(0.8)),
+          Container(
+            padding: const EdgeInsets.all(30),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withOpacity(0.1),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 20,
+                    spreadRadius: 5,
+                  )
+                ]),
+            child: Icon(icon, size: 80, color: Colors.white.withOpacity(0.9)),
+          ),
           const SizedBox(height: 20),
           Text(
             title,
@@ -137,6 +176,10 @@ class _HomePageState extends State<HomePage> {
               fontSize: 30,
               fontWeight: FontWeight.bold,
               color: Colors.white,
+              shadows: [
+                Shadow(
+                    color: Colors.black26, blurRadius: 10, offset: Offset(0, 4))
+              ],
             ),
           ),
         ],

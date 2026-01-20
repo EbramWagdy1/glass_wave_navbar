@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'glass_nav_item.dart';
 import 'painters/bubble_painter.dart';
 import 'widgets/glass_item_widget.dart';
@@ -20,6 +21,9 @@ class CustomGlassNavBar extends StatefulWidget {
 
   /// Color of the liquid bubble indicator.
   final Color bubbleColor;
+
+  /// Optional gradient for the bubble.
+  final Gradient? bubbleGradient;
 
   /// Color of the icons when inactive.
   final Color iconColor;
@@ -50,6 +54,7 @@ class CustomGlassNavBar extends StatefulWidget {
     required this.onTap,
     this.backgroundColor = const Color(0x33FFFFFF), // Semi-transparent white
     this.bubbleColor = Colors.blueAccent,
+    this.bubbleGradient,
     this.iconColor = Colors.white70,
     this.activeIconColor = Colors.white,
     this.height = 70.0,
@@ -81,9 +86,7 @@ class _CustomGlassNavBarState extends State<CustomGlassNavBar>
 
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
 
-    _controller.addListener(() {
-      setState(() {});
-    });
+    // Removed setState here for performance. We'll use AnimatedBuilder.
   }
 
   @override
@@ -98,6 +101,9 @@ class _CustomGlassNavBarState extends State<CustomGlassNavBar>
     _previousIndex = fromIndex;
     _controller.reset();
     _controller.forward();
+    if (widget.items.length > fromIndex && widget.items.length > toIndex) {
+      HapticFeedback.lightImpact();
+    }
   }
 
   @override
@@ -115,12 +121,6 @@ class _CustomGlassNavBarState extends State<CustomGlassNavBar>
         // Calculate the current offset of the bubble based on animation
         final double startOffset = _previousIndex * itemWidth;
         final double endOffset = widget.currentIndex * itemWidth;
-
-        // Interpolate offset manually or simply pass animation value to painter
-        // passing animation value is cleaner if painter handles start/end,
-        // but here we calculate the exact visual offset for the painter.
-        final double currentOffset =
-            startOffset + (endOffset - startOffset) * _animation.value;
 
         return ClipRRect(
           borderRadius: BorderRadius.circular(widget.borderRadius),
@@ -149,27 +149,28 @@ class _CustomGlassNavBarState extends State<CustomGlassNavBar>
               child: Stack(
                 children: [
                   // The Liquid Bubble
-                  Positioned.fill(
-                    child: CustomPaint(
-                      painter: BubblePainter(
-                        bubbleColor: widget.bubbleColor,
-                        animationValue: _animation.value,
-                        // Fix offset to be relative to the bubble center within the item width
-                        // BubblePainter expects offset where the bubble should be drawn.
-                        // We want the bubble centered in the 'currentOffset' item slot.
-                        // We'll pass the itemWidth to the painter or handle it here.
-                        // Let's assume Painter draws at (offset + width/2)
-                        // But wait, our painter logic was: centerX = offset + size.width / 2;
-                        // That size.width is the whole canvas width. That's wrong if we want it to move.
-                        // Let's Re-do the painter logic in the next step or adjust here.
-                        // Actually, better to pass the exact center X we want.
-                        offset: currentOffset -
-                            (constraints.maxWidth / 2) +
-                            (itemWidth / 2),
-                        // Dynamic radius based on item width, capped at a reasonable max size (25.0)
-                        radius: (itemWidth * 0.5).clamp(0.0, 25.0),
-                      ),
-                    ),
+                  RepaintBoundary(
+                    child: AnimatedBuilder(
+                        animation: _animation,
+                        builder: (context, child) {
+                          // Interpolate offset manually or simply pass animation value to painter
+                          // passing animation value is cleaner if painter handles start/end,
+                          // but here we calculate the exact visual offset for the painter.
+                          final double currentOffset = startOffset +
+                              (endOffset - startOffset) * _animation.value;
+
+                          return CustomPaint(
+                            painter: BubblePainter(
+                              bubbleColor: widget.bubbleColor,
+                              animationValue: _animation.value,
+                              offset: currentOffset -
+                                  (constraints.maxWidth / 2) +
+                                  (itemWidth / 2),
+                              radius: (itemWidth * 0.5).clamp(0.0, 25.0),
+                              bubbleGradient: widget.bubbleGradient,
+                            ),
+                          );
+                        }),
                   ),
 
                   // The Items
