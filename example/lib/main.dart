@@ -101,11 +101,11 @@ class _HomePageState extends State<HomePage> {
               );
             }
           },
-          backgroundColor: Colors.white.withOpacity(0.2),
+          backgroundColor: Colors.white.withValues(alpha: 0.2),
           elevation: 0,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
-              side: BorderSide(color: Colors.white.withOpacity(0.3))),
+              side: BorderSide(color: Colors.white.withValues(alpha: 0.3))),
           child: const Icon(Icons.add, color: Colors.white),
           tooltip: 'Add Item',
         ),
@@ -116,11 +116,11 @@ class _HomePageState extends State<HomePage> {
           items: _items,
           currentIndex: _currentIndex.clamp(0, _items.length - 1),
           onTap: _onTap,
-          backgroundColor: Colors.white.withOpacity(0.05),
+          backgroundColor: Colors.white.withValues(alpha: 0.05),
           bubbleGradient: LinearGradient(
             colors: [
-              Colors.white.withOpacity(0.4),
-              Colors.white.withOpacity(0.1)
+              Colors.white.withValues(alpha: 0.4),
+              Colors.white.withValues(alpha: 0.1)
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -156,7 +156,7 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(30),
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.white.withOpacity(0.1),
+                color: Colors.white.withValues(alpha: 0.1),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black12,
@@ -166,7 +166,8 @@ class _HomePageState extends State<HomePage> {
                 ]),
             child: icon is Widget
                 ? icon
-                : Icon(icon, size: 80, color: Colors.white.withOpacity(0.9)),
+                : Icon(icon,
+                    size: 80, color: Colors.white.withValues(alpha: 0.9)),
           ),
           const SizedBox(height: 20),
           Text(

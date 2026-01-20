@@ -51,7 +51,7 @@ class BubblePainter extends CustomPainter {
     // Optional: Add a subtle shadow for depth
     final Path path = Path()..addOval(rect);
 
-    canvas.drawShadow(path, Colors.black.withOpacity(0.2), 4.0, true);
+    canvas.drawShadow(path, Colors.black.withValues(alpha: 0.2), 4.0, true);
   }
 
   @override
