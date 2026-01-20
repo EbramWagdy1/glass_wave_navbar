@@ -86,7 +86,13 @@ class _CustomGlassNavBarState extends State<CustomGlassNavBar>
 
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
 
-    // Removed setState here for performance. We'll use AnimatedBuilder.
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        setState(() {
+          _previousIndex = widget.currentIndex;
+        });
+      }
+    });
   }
 
   @override
@@ -98,7 +104,19 @@ class _CustomGlassNavBarState extends State<CustomGlassNavBar>
   }
 
   void _startAnimation(int fromIndex, int toIndex) {
-    _previousIndex = fromIndex;
+    // Only update previous index if we are not already animating from it
+    // This handles rapid taps better
+    if (!_controller.isAnimating) {
+      _previousIndex = fromIndex;
+    } else {
+      // If already animating, we are at some intermediate point.
+      // Ideally we start from current visual position, but for simplicity
+      // and stability, snapping _previousIndex to the current known 'from'
+      // is acceptable or let it finish.
+      // For now, let's trust the fromIndex passed by parent which is the 'old' index.
+      _previousIndex = fromIndex;
+    }
+
     _controller.reset();
     _controller.forward();
     if (widget.items.length > fromIndex && widget.items.length > toIndex) {

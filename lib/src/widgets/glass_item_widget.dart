@@ -50,17 +50,24 @@ class GlassItemWidget extends StatelessWidget {
                         color: isSelected ? activeIconColor : iconColor,
                       ),
               ),
-              if (item.label != null && isSelected) ...[
-                const SizedBox(height: 4),
-                Text(
-                  item.label!,
-                  style: TextStyle(
-                    color: activeIconColor,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
+              if (item.label != null)
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeOut,
+                  child: isSelected
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: 4),
+                          child: Text(
+                            item.label!,
+                            style: TextStyle(
+                              color: activeIconColor,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        )
+                      : const SizedBox.shrink(),
                 ),
-              ],
             ],
           ),
         ),
