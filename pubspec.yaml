@@ -1,0 +1,17 @@
+name: glass_wave_navbar
+description: A customizable liquid glass bottom navigation bar with smooth bubble animations.
+version: 0.0.1
+homepage: https://github.com/example/glass_wave_navbar
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
