@@ -2,8 +2,11 @@
 
 A production-ready Flutter package that provides a highly customizable navigation bar with a stunning glassmorphism effect and liquid-like bubble animations.
 
-![Glass Wave Navbar Demo](https://via.placeholder.com/600x200.png?text=Glass+Wave+Navbar+Preview)
-*(Replace with actual screenshot)*
+
+https://github.com/EbramWagdy1/glass_wave_navbar/raw/main/assets/Testvideo.mp4
+
+*(Note: If the video doesn't play directly, clear cache or view in repository assets)*
+
 
 ## Features
 
