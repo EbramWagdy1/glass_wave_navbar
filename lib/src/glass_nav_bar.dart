@@ -43,6 +43,10 @@ class CustomGlassNavBar extends StatefulWidget {
   /// Whether dragging is enabled (if applicable for future sliding gestures).
   final bool enableDrag;
 
+  /// Default radius for the liquid bubble.
+  /// If [GlassNavItem.circleSize] is determined, it takes precedence.
+  final double? itemBubbleRadius;
+
   /// Duration of the slide animation.
   final Duration animationDuration;
 
@@ -60,6 +64,7 @@ class CustomGlassNavBar extends StatefulWidget {
     this.height = 70.0,
     this.blurStrength = 10.0,
     this.borderRadius = 20.0,
+    this.itemBubbleRadius,
     this.enableDrag = false,
     this.animationDuration = const Duration(milliseconds: 300),
   }) : super(key: key);
@@ -187,6 +192,7 @@ class _CustomGlassNavBarState extends State<CustomGlassNavBar>
                                   (itemWidth / 2),
                               radius: widget
                                       .items[widget.currentIndex].circleSize ??
+                                  widget.itemBubbleRadius ??
                                   (itemWidth * 0.5).clamp(0.0, 25.0),
                               bubbleGradient: widget.bubbleGradient,
                             ),
