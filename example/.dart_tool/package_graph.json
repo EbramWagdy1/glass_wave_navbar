@@ -42,7 +42,7 @@
     },
     {
       "name": "glass_wave_navbar",
-      "version": "0.0.1",
+      "version": "0.0.3",
       "dependencies": [
         "flutter"
       ]

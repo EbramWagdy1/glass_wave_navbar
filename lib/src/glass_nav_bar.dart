@@ -53,7 +53,7 @@ class CustomGlassNavBar extends StatefulWidget {
     required this.currentIndex,
     required this.onTap,
     this.backgroundColor = const Color(0x33FFFFFF), // Semi-transparent white
-    this.bubbleColor = Colors.blueAccent,
+    this.bubbleColor = const Color(0x33FFFFFF), // Neutral glass white
     this.bubbleGradient,
     this.iconColor = Colors.white70,
     this.activeIconColor = Colors.white,
