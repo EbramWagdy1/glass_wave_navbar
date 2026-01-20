@@ -119,8 +119,8 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.white.withValues(alpha: 0.05),
           bubbleGradient: LinearGradient(
             colors: [
-              Colors.white.withValues(alpha: 0.4),
-              Colors.white.withValues(alpha: 0.1)
+              Colors.white.withValues(alpha: 0.6),
+              Colors.white.withValues(alpha: 0.2)
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,

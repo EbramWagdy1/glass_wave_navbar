@@ -178,6 +178,7 @@ class _CustomGlassNavBarState extends State<CustomGlassNavBar>
                               (endOffset - startOffset) * _animation.value;
 
                           return CustomPaint(
+                            size: Size(constraints.maxWidth, widget.height),
                             painter: BubblePainter(
                               bubbleColor: widget.bubbleColor,
                               animationValue: _animation.value,
