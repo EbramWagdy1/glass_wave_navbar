@@ -1,7 +1,7 @@
 name: glass_wave_navbar
 description: A customizable liquid glass bottom navigation bar with smooth bubble animations.
-version: 0.0.5
-homepage: https://github.com/example/glass_wave_navbar
+version: 0.0.6
+homepage: https://github.com/EbramWagdy1/glass_wave_navbar
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

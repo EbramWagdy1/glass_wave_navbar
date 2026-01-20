@@ -1,3 +1,8 @@
+## 0.0.6
+
+*   **Docs**: Significant improvements to `README.md` (badges, banner image, video link).
+*   **Fix**: Corrected homepage URL in `pubspec.yaml`.
+
 ## 0.0.5
 
 *   **New Feature**: Added `itemBubbleRadius` to `CustomGlassNavBar` for explicit control over the bubble size (defaults to `null` which uses logic or `circleSize`).
