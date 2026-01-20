@@ -166,7 +166,9 @@ class _CustomGlassNavBarState extends State<CustomGlassNavBar>
                               offset: currentOffset -
                                   (constraints.maxWidth / 2) +
                                   (itemWidth / 2),
-                              radius: (itemWidth * 0.5).clamp(0.0, 25.0),
+                              radius: widget
+                                      .items[widget.currentIndex].circleSize ??
+                                  (itemWidth * 0.5).clamp(0.0, 25.0),
                               bubbleGradient: widget.bubbleGradient,
                             ),
                           );

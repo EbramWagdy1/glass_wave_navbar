@@ -34,10 +34,10 @@ class _HomePageState extends State<HomePage> {
   final PageController _pageController = PageController();
 
   final List<GlassNavItem> _items = [
-    const GlassNavItem(icon: Icons.home, label: 'Home'),
-    const GlassNavItem(icon: Icons.search, label: 'Search'),
-    const GlassNavItem(icon: Icons.favorite, label: 'Likes'),
-    const GlassNavItem(icon: Icons.person, label: 'Profile'),
+    const GlassNavItem(icon: Icons.home, label: 'Home', circleSize: 20.0),
+    const GlassNavItem(icon: Icons.search, label: 'Search', circleSize: 20.0),
+    const GlassNavItem(icon: Icons.favorite, label: 'Likes', circleSize: 20.0),
+    const GlassNavItem(icon: Icons.person, label: 'Profile', circleSize: 20.0),
   ];
 
   @override
@@ -50,11 +50,8 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _currentIndex = index;
     });
-    _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeOut,
-    );
+    // Direct navigation: no scroll animation for intermediate pages
+    _pageController.jumpToPage(index);
   }
 
   @override
@@ -150,7 +147,7 @@ class _HomePageState extends State<HomePage> {
     GlassNavItem(icon: Icons.chat_bubble_rounded, label: 'Chat'),
   ];
 
-  Widget _buildPage(String title, IconData icon) {
+  Widget _buildPage(String title, dynamic icon) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -167,7 +164,9 @@ class _HomePageState extends State<HomePage> {
                     spreadRadius: 5,
                   )
                 ]),
-            child: Icon(icon, size: 80, color: Colors.white.withOpacity(0.9)),
+            child: icon is Widget
+                ? icon
+                : Icon(icon, size: 80, color: Colors.white.withOpacity(0.9)),
           ),
           const SizedBox(height: 20),
           Text(

@@ -43,10 +43,12 @@ class GlassItemWidget extends StatelessWidget {
                 scale: isSelected ? 1.2 : 1.0,
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeOutBack,
-                child: Icon(
-                  item.icon,
-                  color: isSelected ? activeIconColor : iconColor,
-                ),
+                child: item.icon is Widget
+                    ? (item.icon as Widget)
+                    : Icon(
+                        item.icon,
+                        color: isSelected ? activeIconColor : iconColor,
+                      ),
               ),
               if (item.label != null && isSelected) ...[
                 const SizedBox(height: 4),
