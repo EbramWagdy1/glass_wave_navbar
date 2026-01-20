@@ -68,6 +68,7 @@ Scaffold(
 | `height` | `double` | `70.0` | Height of the navbar. |
 | `blurStrength` | `double` | `10.0` | Intensity of the glass blur. |
 | `borderRadius` | `double` | `20.0` | Corner radius of the container. |
+| `itemBubbleRadius` | `double?` | `null` | Explicit radius for the bubble. |
 | `animationDuration` | `Duration` | `300ms` | Speed of the selection animation. |
 
 ## Example
