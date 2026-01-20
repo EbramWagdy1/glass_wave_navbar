@@ -34,10 +34,10 @@ class _HomePageState extends State<HomePage> {
   final PageController _pageController = PageController();
 
   final List<GlassNavItem> _items = [
-    const GlassNavItem(icon: Icons.home, label: 'Home', circleSize: 20.0),
-    const GlassNavItem(icon: Icons.search, label: 'Search', circleSize: 20.0),
-    const GlassNavItem(icon: Icons.favorite, label: 'Likes', circleSize: 20.0),
-    const GlassNavItem(icon: Icons.person, label: 'Profile', circleSize: 20.0),
+    const GlassNavItem(icon: Icons.home, label: 'Home', circleSize: 35.0),
+    const GlassNavItem(icon: Icons.search, label: 'Search', circleSize: 35.0),
+    const GlassNavItem(icon: Icons.favorite, label: 'Likes', circleSize: 35.0),
+    const GlassNavItem(icon: Icons.person, label: 'Profile', circleSize: 35.0),
   ];
 
   @override
@@ -64,7 +64,10 @@ class _HomePageState extends State<HomePage> {
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF6E45E2), Color(0xFF88D3CE)],
+                colors: [
+                  Color.fromARGB(255, 74, 73, 78),
+                  Color.fromARGB(255, 64, 71, 71)
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -137,14 +140,20 @@ class _HomePageState extends State<HomePage> {
 
   // Pre-defined list of distinct icons for demo
   final List<GlassNavItem> _availableIcons = const [
-    GlassNavItem(icon: Icons.home_rounded, label: 'Home'),
-    GlassNavItem(icon: Icons.search_rounded, label: 'Search'),
-    GlassNavItem(icon: Icons.favorite_rounded, label: 'Likes'),
-    GlassNavItem(icon: Icons.person_rounded, label: 'Profile'),
-    GlassNavItem(icon: Icons.settings_rounded, label: 'Settings'),
-    GlassNavItem(icon: Icons.shopping_cart_rounded, label: 'Cart'),
-    GlassNavItem(icon: Icons.notifications_rounded, label: 'Notify'),
-    GlassNavItem(icon: Icons.chat_bubble_rounded, label: 'Chat'),
+    GlassNavItem(icon: Icons.home_rounded, label: 'Home', circleSize: 50.0),
+    GlassNavItem(icon: Icons.search_rounded, label: 'Search', circleSize: 50.0),
+    GlassNavItem(
+        icon: Icons.favorite_rounded, label: 'Likes', circleSize: 50.0),
+    GlassNavItem(
+        icon: Icons.person_rounded, label: 'Profile', circleSize: 50.0),
+    GlassNavItem(
+        icon: Icons.settings_rounded, label: 'Settings', circleSize: 50.0),
+    GlassNavItem(
+        icon: Icons.shopping_cart_rounded, label: 'Cart', circleSize: 50.0),
+    GlassNavItem(
+        icon: Icons.notifications_rounded, label: 'Notify', circleSize: 50.0),
+    GlassNavItem(
+        icon: Icons.chat_bubble_rounded, label: 'Chat', circleSize: 50.0),
   ];
 
   Widget _buildPage(String title, dynamic icon) {
